@@ -4,7 +4,7 @@
 def myFilter(L, num): return [ x for x in L if x%num != 0 ]
 
 ## Problem 2
-def myLists(L): return [ list[range(1,x+1)] for x in L ]
+def myLists(L): return [ list(range(1,x+1)) for x in L ]
 
 ## Problem 3
 def myFunctionComposition(f, g): return { k:g[f[k]] for x in f.keys() for k in f.keys() }
