@@ -1,5 +1,4 @@
 voting_data = list(open("voting_record_dump109.txt"))
-
 ## Task 1
 
 def create_voting_dict():

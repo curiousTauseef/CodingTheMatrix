@@ -1,42 +1,50 @@
 # Please fill out this stencil and submit using the provided submission script.
 
-
-
-
-
 ## Problem 1
 def getitem(v,d):
     "Returns the value of entry d in v"
     assert d in v.D
-    pass
+    return v.f[d] if d in v.f else 0
 
 def setitem(v,d,val):
     "Set the element of v with label d to be val"
     assert d in v.D
-    pass
+    v.f[d] = val
 
 def equal(u,v):
     "Returns true iff u is equal to v"
     assert u.D == v.D
-    pass
+    return {k:u.f[k] for k in u.f if u.f[k] != 0} == {k:v.f[k] for k in v.f if v.f[k] != 0}
 
 def add(u,v):
     "Returns the sum of the two vectors"
     assert u.D == v.D
-    pass
+    sum_vec = {}
+    for j in v.f.keys():
+        if j in u.f.keys():
+            sum_vec[j] = v.f[j] + u.f[j]
+        else:
+            sum_vec[j] = v.f[j]
+    for i in u.f.keys():
+        if i not in v.f.keys():
+            sum_vec[i] = u.f[i]
+    return Vec(u.D, sum_vec.copy())
 
 def dot(u,v):
     "Returns the dot product of the two vectors"
     assert u.D == v.D
-    pass
+    return sum([getitem(v,i)*getitem(u,i) for i in u.D])
 
 def scalar_mul(v, alpha):
     "Returns the scalar-vector product alpha times v"
-    pass
+    product = {}
+    for i in v.f.keys():
+        product[i] = alpha * v.f[i]
+    return Vec(v.D, product.copy())
 
 def neg(v):
     "Returns the negation of a vector"
-    pass
+    return scalar_mul(v,-1)
 
 ##### NO NEED TO MODIFY BELOW HERE #####
 class Vec:
