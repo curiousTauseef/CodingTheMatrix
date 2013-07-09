@@ -35,7 +35,7 @@ u_0100010 = {'b','c','d','e'}
 # Use the same format as the previous problem
 
 v_0010010 = {'c','d'}
-v_0100010 = {'b','c','c','d'}
+v_0100010 = set()
 
 ## Problem 6
 uv_a = sum([u*v for u,v in zip([1,0],[5,4321])])
@@ -48,7 +48,7 @@ uv_d = sum([u*v for u,v in zip([-(2**0.5)/2,(2**0.5)/2],[(2**0.5)/2,-(2**0.5)/2]
 x_gf2 = [one,0,0,0]
 
 ## Problem 8
-v1 = [...]
-v2 = [...]
-v3 = [...]
+v1 = [2,3,-4,1]
+v2 = [1,-5,2,0]
+v3 = [4,1,-1,-1]
 
