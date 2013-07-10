@@ -28,9 +28,12 @@ def create_voting_dict():
 
     The lists for each senator should preserve the order listed in voting data. 
     """
-    return dict() 
+    record = {}
+    for i in voting_data:
+        split_line = i.split()
+        record[split_line[0]] = [int(j) for j in split_line[3:]]
+    return record
     
-
 ## Task 2
 
 def policy_compare(sen_a, sen_b, voting_dict):
@@ -44,9 +47,8 @@ def policy_compare(sen_a, sen_b, voting_dict):
         >>> policy_compare('Fox-Epstein','Ravella', voting_dict)
         -2
     """
-    return 0.0
-
-
+    return sum([voting_dict[sen_a][i]*voting_dict[sen_b][i] for i in range(len(voting_dict[sen_a]))])
+ 
 ## Task 3
 
 def most_similar(sen, voting_dict):
@@ -63,10 +65,16 @@ def most_similar(sen, voting_dict):
 
     Note that you can (and are encouraged to) re-use you policy_compare procedure.
     """
+    compare=-2
+    name=""
+    for i in voting_dict.keys():
+        if i!=sen:
+            temp = policy_compare(sen,i,voting_dict)
+            if temp>compare:
+                compare=temp
+                name=i
+    return name
     
-    return ""
-    
-
 ## Task 4
 
 def least_similar(sen, voting_dict):
@@ -80,16 +88,20 @@ def least_similar(sen, voting_dict):
         >>> least_similar('Klein', vd)
         'Ravella'
     """
-    return ""
+    compare=float('inf')
+    name=""
+    for i in voting_dict.keys():
+        if i!=sen:
+            temp = policy_compare(sen,i,voting_dict)
+            if temp<compare:
+                compare=temp
+                name=i
+    return name
     
-    
-
 ## Task 5
 
-most_like_chafee    = ''
-least_like_santorum = '' 
-
-
+most_like_chafee    = most_similar('Chafee',create_voting_dict())
+least_like_santorum = least_similar('Santorum',create_voting_dict())
 
 # Task 6
 
@@ -102,10 +114,9 @@ def find_average_similarity(sen, sen_set, voting_dict):
         >>> find_average_similarity('Klein', {'Fox-Epstein','Ravella'}, vd)
         -0.5
     """
-    return ...
+    return sum([policy_compare(sen,i,voting_dict) for i in sen_set])/len(sen_set)
 
 most_average_Democrat = ... # give the last name (or code that computes the last name)
-
 
 # Task 7
 
@@ -123,7 +134,6 @@ def find_average_record(sen_set, voting_dict):
 
 average_Democrat_record = ... # (give the vector)
 
-
 # Task 8
 
 def bitter_rivals(voting_dict):
@@ -137,5 +147,14 @@ def bitter_rivals(voting_dict):
         >>> bitter_rivals(voting_dict)
         ('Fox-Epstein', 'Ravella')
     """
-    return (..., ...)
-
+    names = ()
+    rivals = {}
+    compare = float('inf')
+    for i in voting_dict.keys():
+        rivals[i] = least_similar(i, voting_dict)
+    for i in rivals:
+        temp = policy_compare(i, rivals[i], voting_dict)
+        if temp < compare:
+            compare = temp
+            name = (i, rivals[i])
+    return name
