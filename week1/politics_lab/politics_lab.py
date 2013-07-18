@@ -116,7 +116,7 @@ def find_average_similarity(sen, sen_set, voting_dict):
     """
     return sum([policy_compare(sen,i,voting_dict) for i in sen_set])/len(sen_set)
 
-most_average_Democrat = ... # give the last name (or code that computes the last name)
+most_average_Democrat = 'Murkowski' # give the last name (or code that computes the last name)
 
 # Task 7
 
@@ -130,9 +130,9 @@ def find_average_record(sen_set, voting_dict):
         >>> find_average_record({'Fox-Epstein','Ravella'}, voting_dict)
         [-0.5, -0.5, 0.0]
     """
-    return ...
+    return [sum([voting_dict[sen][i] for sen in sen_set])/len(sen_set) for i in range(len(list(voting_dict.values())[0]))]
 
-average_Democrat_record = ... # (give the vector)
+average_Democrat_record = [-0.16279069767441862, -0.23255813953488372, 1.0, 0.8372093023255814, 0.9767441860465116, -0.13953488372093023, -0.9534883720930233, 0.813953488372093, 0.9767441860465116, 0.9767441860465116, 0.9069767441860465, 0.7674418604651163, 0.6744186046511628, 0.9767441860465116, -0.5116279069767442, 0.9302325581395349, 0.9534883720930233, 0.9767441860465116, -0.3953488372093023, 0.9767441860465116, 1.0, 1.0, 1.0, 0.9534883720930233, -0.4883720930232558, 1.0, -0.32558139534883723, -0.06976744186046512, 0.9767441860465116, 0.8604651162790697, 0.9767441860465116, 0.9767441860465116, 1.0, 1.0, 0.9767441860465116, -0.3488372093023256, 0.9767441860465116, -0.4883720930232558, 0.23255813953488372, 0.8837209302325582, 0.4418604651162791, 0.9069767441860465, -0.9069767441860465, 1.0, 0.9069767441860465, -0.3023255813953488] # (give the vector)
 
 # Task 8
 
